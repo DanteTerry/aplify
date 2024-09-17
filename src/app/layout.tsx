@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { Gabarito } from "next/font/google";
+import DarkModeProvider from "@/components/providers/DarkModeProvider";
 
 const gabarito = Gabarito({
   weight: ["400", "500", "600", "700", "800", "900"],
@@ -22,7 +23,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={` ${gabarito.className} antialiased`}>{children}</body>
+      <body className={` ${gabarito.className} antialiased`}>
+        <DarkModeProvider>{children}</DarkModeProvider>
+      </body>
     </html>
   );
 }
