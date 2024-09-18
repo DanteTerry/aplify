@@ -1,3 +1,9 @@
 {
-  "cSpell.words": ["Aplify", "Gabarito"]
+  "cSpell.words": [
+    "Aplify",
+    "Gabarito"
+  ],
+  "workbench.colorCustomizations": {
+    "sash.hoverBorder": "#b450f3"
+  }
 }

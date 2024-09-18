@@ -15,4 +15,8 @@ export const navLinks = [
     title: "Docs",
     href: "docs",
   },
+  {
+    title: "Github",
+    href: "https://github.com/DanteTerry/aplify",
+  },
 ];

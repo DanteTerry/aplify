@@ -24,7 +24,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={` ${gabarito.className} antialiased`}>
+      <body className={` ${gabarito.className} -z-50 antialiased`}>
         <DarkModeProvider>
           <Navbar />
           {children}

@@ -1,0 +1,10 @@
+import Hero from "./_components/Hero";
+
+function Home() {
+  return (
+    <div className="flex h-screen w-full bg-white pt-24 text-black dark:bg-[#1e1e1e] dark:text-white">
+      <Hero />
+    </div>
+  );
+}
+export default Home;
