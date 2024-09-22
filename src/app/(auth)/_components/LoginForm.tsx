@@ -3,6 +3,7 @@
 import { loginSchema } from "@/schema/login";
 import { TLoginSchema } from "@/types/types";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { Loader } from "lucide-react";
 import { useForm } from "react-hook-form";
 
 function LoginForm() {
@@ -68,9 +69,16 @@ function LoginForm() {
           )}
         </div>
       </div>
-
-      <button className="rounded-[7px] bg-blue-600 p-2 text-white hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-400">
-        Log in
+      <button
+        disabled={isSubmitting}
+        type="submit"
+        className="flex items-center justify-center rounded-[7px] bg-blue-600 p-2 text-white hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-400"
+      >
+        {isSubmitting ? (
+          <Loader className="animate-spin" size={25} />
+        ) : (
+          "Sign In"
+        )}
       </button>
     </form>
   );
