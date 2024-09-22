@@ -1,6 +1,26 @@
+"use client";
+
+import { loginSchema } from "@/schema/login";
+import { TLoginSchema } from "@/types/types";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+
 function LoginForm() {
+  const {
+    register,
+    formState: { errors, isSubmitting },
+    handleSubmit,
+  } = useForm<TLoginSchema>({ resolver: zodResolver(loginSchema) });
+
+  const onLogin = (data: TLoginSchema) => {
+    console.log(data);
+  };
+
   return (
-    <div className="mx-auto flex w-full max-w-md flex-col gap-5 rounded-xl bg-white p-5 shadow-sm dark:bg-gray-800">
+    <form
+      onSubmit={handleSubmit(onLogin)}
+      className="mx-auto flex w-full max-w-md flex-col gap-5 rounded-xl bg-white p-5 shadow-sm dark:bg-gray-800"
+    >
       <div className="flex flex-col gap-2">
         <label
           htmlFor="email"
@@ -8,14 +28,23 @@ function LoginForm() {
         >
           Email
         </label>
-        <input
-          id="email"
-          name="email"
-          type="email"
-          className="rounded-[7px] border border-gray-300 p-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:border-gray-600 dark:focus:ring-blue-400"
-          placeholder="Enter your email"
-        />
+        <div className="flex w-full flex-col">
+          <input
+            id="email"
+            type="email"
+            className="rounded-[7px] border border-gray-300 p-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:border-gray-600 dark:focus:ring-blue-400"
+            placeholder="Enter your email"
+            aria-label="Email"
+            {...register("email")}
+          />
+          {errors.email?.message && (
+            <p className="mt-2 text-xs text-red-700 dark:text-red-300">
+              {errors.email?.message}
+            </p>
+          )}
+        </div>
       </div>
+
       <div className="flex flex-col gap-2">
         <label
           htmlFor="password"
@@ -23,19 +52,27 @@ function LoginForm() {
         >
           Password
         </label>
-        <input
-          type="password"
-          id="password"
-          name="password"
-          className="rounded-[7px] border border-gray-300 p-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:border-gray-600 dark:focus:ring-blue-400"
-          placeholder="Enter your password"
-        />
+        <div className="flex w-full flex-col">
+          <input
+            type="password"
+            id="password"
+            className="rounded-[7px] border border-gray-300 p-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:border-gray-600 dark:focus:ring-blue-400"
+            placeholder="Enter your password"
+            aria-label="Password"
+            {...register("password")}
+          />
+          {errors.password?.message && (
+            <p className="mt-2 text-xs text-red-700 dark:text-red-300">
+              {errors.password?.message}
+            </p>
+          )}
+        </div>
       </div>
 
       <button className="rounded-[7px] bg-blue-600 p-2 text-white hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-400">
         Log in
       </button>
-    </div>
+    </form>
   );
 }
 export default LoginForm;

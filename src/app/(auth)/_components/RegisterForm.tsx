@@ -1,6 +1,27 @@
+"use client";
+
+import { registerSchema } from "@/schema/register";
+import { TRegisterSchema } from "@/types/types";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Loader } from "lucide-react";
+import { useForm } from "react-hook-form";
+
 function RegisterForm() {
+  const {
+    register,
+    formState: { errors, isSubmitting },
+    handleSubmit,
+  } = useForm<TRegisterSchema>({ resolver: zodResolver(registerSchema) });
+
+  const onRegister = (data: TRegisterSchema) => {
+    console.log(data);
+  };
+
   return (
-    <form className="mx-auto flex w-full max-w-md flex-col gap-5 rounded-xl bg-white p-5 shadow-sm dark:bg-gray-800">
+    <form
+      onSubmit={handleSubmit(onRegister)}
+      className="mx-auto flex w-full max-w-md flex-col gap-5 rounded-xl bg-white p-5 shadow-sm dark:bg-gray-800"
+    >
       <div className="flex flex-col gap-2">
         <label
           htmlFor="name"
@@ -8,14 +29,21 @@ function RegisterForm() {
         >
           Name
         </label>
-        <input
-          id="name"
-          name="name"
-          type="text"
-          className="rounded-[7px] border border-gray-300 p-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:border-gray-600 dark:focus:ring-blue-400"
-          placeholder="Enter your name"
-          aria-label="Name"
-        />
+        <div className="flex w-full flex-col">
+          <input
+            id="name"
+            type="text"
+            className="rounded-[7px] border border-gray-300 p-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:border-gray-600 dark:focus:ring-blue-400"
+            placeholder="Enter your name"
+            aria-label="Name"
+            {...register("name")}
+          />
+          {errors.name?.message && (
+            <p className="mt-2 text-xs text-red-700 dark:text-red-300">
+              {errors.name?.message}
+            </p>
+          )}
+        </div>
       </div>
       <div className="flex flex-col gap-2">
         <label
@@ -24,14 +52,21 @@ function RegisterForm() {
         >
           Email
         </label>
-        <input
-          id="email"
-          name="email"
-          type="email"
-          className="rounded-[7px] border border-gray-300 p-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:border-gray-600 dark:focus:ring-blue-400"
-          placeholder="Enter your email"
-          aria-label="Email"
-        />
+        <div className="flex w-full flex-col">
+          <input
+            id="email"
+            type="email"
+            className="rounded-[7px] border border-gray-300 p-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:border-gray-600 dark:focus:ring-blue-400"
+            placeholder="Enter your email"
+            aria-label="Email"
+            {...register("email")}
+          />
+          {errors.email?.message && (
+            <p className="mt-2 text-xs text-red-700 dark:text-red-300">
+              {errors.email?.message}
+            </p>
+          )}
+        </div>
       </div>
       <div className="flex flex-col gap-2">
         <label
@@ -40,21 +75,33 @@ function RegisterForm() {
         >
           Password
         </label>
-        <input
-          type="password"
-          id="password"
-          name="password"
-          className="rounded-[7px] border border-gray-300 p-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:border-gray-600 dark:focus:ring-blue-400"
-          placeholder="Enter your password"
-          aria-label="Password"
-        />
+        <div className="flex w-full flex-col">
+          <input
+            type="password"
+            id="password"
+            className="rounded-[7px] border border-gray-300 p-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:border-gray-600 dark:focus:ring-blue-400"
+            placeholder="Enter your password"
+            aria-label="Password"
+            {...register("password")}
+          />
+          {errors.password?.message && (
+            <p className="mt-2 text-xs text-red-700 dark:text-red-300">
+              {errors.password?.message}
+            </p>
+          )}
+        </div>
       </div>
 
       <button
+        disabled={isSubmitting}
         type="submit"
-        className="rounded-[7px] bg-blue-600 p-2 text-white hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-400"
+        className="flex items-center justify-center rounded-[7px] bg-blue-600 p-2 text-white hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-400"
       >
-        Create an account
+        {isSubmitting ? (
+          <Loader className="animate-spin" size={25} />
+        ) : (
+          "Create an account"
+        )}
       </button>
     </form>
   );
