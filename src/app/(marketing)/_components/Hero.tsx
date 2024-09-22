@@ -59,7 +59,7 @@ function Hero() {
           {/* Get Started Button */}
           <div className="group flex w-max cursor-pointer rounded-[8px] border-2 border-black transition-all duration-500 dark:border-white">
             <Link
-              href="/get-started"
+              href="/sign-up"
               className="-translate-y-[6px] translate-x-[6px] rounded-[8px] bg-[#141414] px-4 py-2 text-base text-white transition-all duration-300 hover:shadow-lg group-hover:-translate-y-[3px] group-hover:translate-x-[3px] dark:bg-white dark:text-black sm:px-5 sm:py-2 sm:text-lg md:px-6 md:py-3 md:text-lg"
             >
               Get Started
