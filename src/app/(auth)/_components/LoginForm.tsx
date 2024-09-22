@@ -5,6 +5,8 @@ import { TLoginSchema } from "@/types/types";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Loader } from "lucide-react";
 import { useForm } from "react-hook-form";
+import FormError from "./FormError";
+import FormSuccess from "./FormSuccess";
 
 function LoginForm() {
   const {
@@ -20,7 +22,7 @@ function LoginForm() {
   return (
     <form
       onSubmit={handleSubmit(onLogin)}
-      className="mx-auto flex w-full max-w-md flex-col gap-5 rounded-xl bg-white p-5 shadow-sm dark:bg-gray-800"
+      className="mx-auto flex w-full max-w-md flex-col gap-5 rounded-xl border bg-white p-5 shadow-sm dark:border-gray-800 dark:bg-gray-800"
     >
       <div className="flex flex-col gap-2">
         <label
@@ -69,6 +71,8 @@ function LoginForm() {
           )}
         </div>
       </div>
+      <FormError message="Login failed" />
+      <FormSuccess message="Email sent" />
       <button
         disabled={isSubmitting}
         type="submit"

@@ -20,7 +20,7 @@ function RegisterForm() {
   return (
     <form
       onSubmit={handleSubmit(onRegister)}
-      className="mx-auto flex w-full max-w-md flex-col gap-5 rounded-xl bg-white p-5 shadow-sm dark:bg-gray-800"
+      className="mx-auto flex w-full max-w-md flex-col gap-5 rounded-xl border bg-white p-5 shadow-sm dark:border-gray-800 dark:bg-gray-800"
     >
       <div className="flex flex-col gap-2">
         <label
