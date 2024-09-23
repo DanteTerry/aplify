@@ -1,5 +1,4 @@
-import { loginSchema } from "@/schema/login";
-import { registerSchema } from "@/schema/register";
+import { loginSchema, registerSchema } from "@/schema/schema";
 import { z } from "zod";
 
 // register schema

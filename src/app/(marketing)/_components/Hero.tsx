@@ -36,7 +36,7 @@ function Hero() {
         <div className="mt-0 md:mt-2">
           {/* Highlighted heading */}
           <h1 className="flex gap-2 text-[42px] font-extrabold text-[#141414] dark:text-white sm:text-6xl md:gap-3 md:text-7xl lg:text-7xl">
-            <span> Open-Source</span>
+            <span>Open-Source</span>
             <TooltipProvider>
               <Tooltip>
                 <TooltipTrigger>JAM</TooltipTrigger>

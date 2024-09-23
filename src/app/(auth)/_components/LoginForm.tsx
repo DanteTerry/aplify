@@ -1,14 +1,19 @@
 "use client";
 
-import { loginSchema } from "@/schema/login";
 import { TLoginSchema } from "@/types/types";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Loader } from "lucide-react";
 import { useForm } from "react-hook-form";
 import FormError from "./FormError";
 import FormSuccess from "./FormSuccess";
+import { loginSchema } from "@/schema/schema";
+import { loginAction } from "@/actions/login";
+import { useState } from "react";
 
 function LoginForm() {
+  const [error, setError] = useState<string | undefined>("");
+  const [success, setSuccess] = useState<string | undefined>("");
+
   const {
     register,
     formState: { errors, isSubmitting },
@@ -16,7 +21,14 @@ function LoginForm() {
   } = useForm<TLoginSchema>({ resolver: zodResolver(loginSchema) });
 
   const onLogin = (data: TLoginSchema) => {
-    console.log(data);
+    setError("");
+
+    setSuccess("");
+
+    loginAction(data).then((data) => {
+      setError(data.error);
+      setSuccess(data.success);
+    });
   };
 
   return (
@@ -71,8 +83,8 @@ function LoginForm() {
           )}
         </div>
       </div>
-      <FormError message="Login failed" />
-      <FormSuccess message="Email sent" />
+      <FormError message={error} />
+      <FormSuccess message={success} />
       <button
         disabled={isSubmitting}
         type="submit"

@@ -2,7 +2,7 @@ import Image from "next/image";
 
 function AuthWrapper({ children }: { children: React.ReactNode }) {
   return (
-    <div className="flex h-screen w-full items-center justify-center bg-gradient-to-r from-blue-400 to-blue-600 p-4 dark:bg-gradient-to-r dark:from-blue-800 dark:to-blue-900">
+    <div className="flex h-screen w-full items-center justify-center bg-gradient-to-r from-teal-300 via-blue-300 to-purple-400 p-4 dark:bg-gradient-to-r dark:from-indigo-900 dark:via-indigo-800 dark:to-blue-900">
       <div className="grid w-full max-w-6xl grid-cols-1 gap-x-6 rounded-xl bg-[#FAF9F6] p-4 dark:bg-gray-900 md:grid-cols-2 md:p-6">
         <div className="flex-grow px-2 md:px-10">{children}</div>
         <div className="hidden h-full w-full flex-col justify-center gap-3 rounded-xl bg-[#4353EF] p-4 text-white dark:bg-[#2D3A91] md:flex md:p-6">

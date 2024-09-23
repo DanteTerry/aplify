@@ -1,10 +1,14 @@
 "use client";
 
-import { registerSchema } from "@/schema/register";
+import { registerAction } from "@/actions/register";
+import { registerSchema } from "@/schema/schema";
 import { TRegisterSchema } from "@/types/types";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Loader } from "lucide-react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
+import FormSuccess from "./FormSuccess";
+import FormError from "./FormError";
 
 function RegisterForm() {
   const {
@@ -12,9 +16,14 @@ function RegisterForm() {
     formState: { errors, isSubmitting },
     handleSubmit,
   } = useForm<TRegisterSchema>({ resolver: zodResolver(registerSchema) });
+  const [error, setError] = useState<string | undefined>("");
+  const [success, setSuccess] = useState<string | undefined>("");
 
   const onRegister = (data: TRegisterSchema) => {
-    console.log(data);
+    registerAction(data).then((data) => {
+      setError(data.error);
+      setSuccess(data.success);
+    });
   };
 
   return (
@@ -91,6 +100,8 @@ function RegisterForm() {
           )}
         </div>
       </div>
+      <FormError message={error} />
+      <FormSuccess message={success} />
 
       <button
         disabled={isSubmitting}
